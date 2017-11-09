@@ -1,0 +1,48 @@
+
+{% extends 'abids/base.html' %}
+
+
+{% block content %}
+
+
+<p>{{ auction.title }}</p>
+
+{% if user.is_authenticated %}
+<p><a href="{% url 'abids:edit_auction' auction.id%}">редактировать</a></p>
+{% endif %}
+
+<p>{{ auction.desc }} </p>
+<p>{{ auction.price }}</p>
+
+<p>Bids:</p>
+
+<ul>
+    {% for bid in bids %}
+    <li>{{bid}} {{bid.bid_owner}} {{bid.pub_date|date:'d M, Y H:i'}}</li>
+
+    {% empty %}
+    <li>Пока не было ставок</li>
+
+    {% endfor %}
+</ul>
+
+
+
+{% if user.is_authenticated %}
+<p>Добавить новую ставку ({{bid_step}}):</p>
+
+{% if is_success %}{{is_success}}{% endif %}
+
+<form action="{% url 'abids:auction' auction.id %}" method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+
+    <button name="submit">Сделать ставку</button>
+    </form>
+
+{% else %}
+<a href="{% url 'users:login' %}">log in</a>
+{% endif %}
+
+
+{% endblock content %}
