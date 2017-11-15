@@ -142,16 +142,16 @@ def auction(request, auction_id):
             new_bid = form.save(commit=False)
 
             #проверяем что ставка меньше предыдущей
-            if (new_bid.bid < last_bid) and (new_bid.bid > 0):
+#            if (new_bid.bid < last_bid) and (new_bid.bid > 0):
 
-                new_bid.auction = auction
-                new_bid.bid_owner = request.user
-                new_bid.bid_ip = get_ip(request)
-                new_bid.save()
-                return HttpResponseRedirect(reverse('abids:auction', args=[auction_id]))
-            else:
-                form = CompetitorForm()
-                is_success = "ставка не может быть больше: " + str(bid_step) + " либо меньше 1."
+            new_bid.auction = auction
+            new_bid.bid_owner = request.user
+            new_bid.bid_ip = get_ip(request)
+            new_bid.save()
+            return HttpResponseRedirect(reverse('abids:auction', args=[auction_id]))
+            #else:
+            #    form = CompetitorForm()
+            #    is_success = "ставка не может быть больше: " + str(bid_step) + " либо меньше 1."
 
     context = {'auction': auction, 'bids': bids, 'form': form, 'bid_step': bid_step, 'is_success': is_success}
     return render(request, 'abids/auction.html', context)

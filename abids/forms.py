@@ -10,5 +10,5 @@ class AuctionForm(forms.ModelForm):
 class CompetitorForm(forms.ModelForm):
     class Meta:
         model = Competitor
-        fields = ['bid']
-        labels = {'bid': ''}
+        fields = ['bid', 'bid_comment']
+        labels = {'bid': 'Стоимость', 'bid_comment': 'Комментарий'}

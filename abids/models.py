@@ -19,6 +19,7 @@ class Competitor(models.Model):
     auction = models.ForeignKey(Auction)
     bid = models.PositiveIntegerField()
     bid_owner = models.ForeignKey(User)
+    bid_comment = models.CharField(max_length=75)
     bid_ip = models.GenericIPAddressField()
     pub_date = models.DateTimeField(auto_now_add=True)
 
