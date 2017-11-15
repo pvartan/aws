@@ -11,6 +11,15 @@ from abids.forms import AuctionForm, CompetitorForm
 
 # Create your views here.
 
+# получаме ip
+def get_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ipaddress = x_forwarded_for.split(',')[-1].strip
+    else:
+        ipaddress = request.META.get('REMOTE_ADDR')
+    return ipaddress
+
 def index(request):
     """домашняя страница"""
     return render(request, 'abids/index.html')
@@ -67,6 +76,7 @@ def new_auction(request):
             new_auction = form.save(commit=False)
             # присваеваем запись пользователю
             new_auction.owner = request.user
+            new_auction.ip = get_ip(request)
             new_auction.save()
             return HttpResponseRedirect(reverse('abids:auction', args=[last_auction]))
     else:
@@ -136,6 +146,7 @@ def auction(request, auction_id):
 
                 new_bid.auction = auction
                 new_bid.bid_owner = request.user
+                new_bid.bid_ip = get_ip(request)
                 new_bid.save()
                 return HttpResponseRedirect(reverse('abids:auction', args=[auction_id]))
             else:

@@ -8,6 +8,7 @@ class Auction(models.Model):
     desc = models.TextField()
     price = models.PositiveIntegerField()
     pub_date = models.DateTimeField(auto_now_add=True)
+    ip = models.GenericIPAddressField()
     owner = models.ForeignKey(User)
 
     def __str__(self):
@@ -18,6 +19,7 @@ class Competitor(models.Model):
     auction = models.ForeignKey(Auction)
     bid = models.PositiveIntegerField()
     bid_owner = models.ForeignKey(User)
+    bid_ip = models.GenericIPAddressField()
     pub_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
