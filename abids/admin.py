@@ -10,7 +10,7 @@ class AuctionAdmin(admin.ModelAdmin):
     search_fields = ['id', 'title', 'desc']
 
 class CompetitorAdmin(admin.ModelAdmin):
-    list_display = ('auction', 'bid', 'bid_owner', 'bid_ip')
+    list_display = ('auction', 'bid', 'bid_owner', 'bid_comment', 'bid_ip')
     list_filter = ('auction__id', 'bid_owner', 'auction', 'pub_date')
     search_fields = ['auction__id', 'auction__owner']
 

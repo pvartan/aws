@@ -25,7 +25,7 @@ SECRET_KEY = 'aep9bfs)n8@46+o=w=d&4p97^%(evn5&wb0^(=c(8a7%%g6tcc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['34.216.76.170']
 
 
 # Application definition
@@ -129,3 +129,4 @@ LOGIN_URL = '/users/login'
 BOOTSTRAP3 = {
         'include_jquery': True,
         }
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
