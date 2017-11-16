@@ -1,7 +1,17 @@
 {% extends 'abids/base.html'%}
 
+
+{% block header %}
+<div class='jumbotron'>
+<h1>Заявки</h1>
+</div>
+{% endblock header %}
+
 {% block content %}
 
-<a href="{% url 'abids:auctions' %}">Заявки</a>
-
+<h2>
+Размещайте заявки на сайте и получайте самые выгодные предложения
+<a href="{% url 'users:register' %}">Регистрация</a>
+</h2>
 {% endblock content %}
+

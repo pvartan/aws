@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'abids',
     'users',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/users/login'
+
+# Настройки django-bootstrap3
+
+BOOTSTRAP3 = {
+        'include_jquery': True,
+        }

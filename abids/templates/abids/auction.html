@@ -1,21 +1,48 @@
-
 {% extends 'abids/base.html' %}
-
 
 {% block content %}
 
 
-{{ auction.title }}
+<div class="container">
+        <div class="row">
+                <div class="col-sm-6" >
 
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+<h3> 
+    {{auction.title }}
+<small>
+{{ auction.pub_date|date:'d M, Y H:i' }}
 {% if user.is_authenticated %}
 <a href="{% url 'abids:edit_auction' auction.id%}">[edit]</a>
 {% endif %}
+</small>
+</h3>
 
-<p>{{ auction.desc }} </p>
+</div>
+<div class="panel-body">
+
+     {{ auction.desc|linebreaks }}
 <p>Бюджет: {{ auction.price }} р.</p>
-<br>
-<p>Предложения:</p>
 
+</div>
+</div>
+</div> <!-- panel -->
+
+      
+  
+<div class="col-sm-6" >
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+    <h3>Предложения:</h3>
+</div>
+
+<div class="panel-body">
 <ul style="list-style-type:none">
     {% for bid in bids %}
     <li>{{bid}} р. "{{bid.bid_comment}}" <a href="#">{{bid.bid_owner}}</a> {% comment%}{{bid.pub_date|date:'d M, Y H:i'}}{% endcomment%}</li>
@@ -28,8 +55,8 @@
 
 
 <br>
-{% if user.is_authenticated %}
 <p>Сделать новое предложение :</p>
+{% if user.is_authenticated %}
 
 {% if is_success %}{{is_success}}{% endif %}
 
@@ -43,6 +70,15 @@
 {% else %}
 <a href="{% url 'users:login' %}">log in</a>
 {% endif %}
+</div>
+</div>
 
+
+
+
+
+</div>
+  </div>
+  </div>
 
 {% endblock content %}
