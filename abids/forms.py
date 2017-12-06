@@ -11,4 +11,4 @@ class CompetitorForm(forms.ModelForm):
     class Meta:
         model = Competitor
         fields = ['bid', 'bid_comment']
-        labels = {'bid': 'Цена', 'bid_comment': 'Комментарий'}
+        labels = {'bid': 'Цена:', 'bid_comment': 'Комментарий'}

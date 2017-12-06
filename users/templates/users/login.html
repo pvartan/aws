@@ -1,18 +1,24 @@
-{% extends 'abids/base.html' %}
+{% extends "abids/base.html" %}
+{% load bootstrap3 %}
 
+{% block header %}
+<h2>Log in</h2>
+
+<h3><a href="{% url 'users:register' %}">Регистрация</a></h3>
+{% endblock header %}
 
 {% block content %}
 
-{% if form.errors %}
-<p>Неправильный логин и (или) пароль. Попробуйте заного.</p>
-{% endif %}
 
-<form method="post" action="{%url 'users:login'%}">
+
+<form method="post" action="{% url 'users:login' %}" class="form">
     {% csrf_token %}
-    {{form.as_p}}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button name="submit" class="btn btn-primary">log in</button>
+    {% endbuttons %}
+    <input type="hidden" name="next" value="{% url 'abids:auctions' %}" />
 
-    <button name="submit">log in</button>
-    <input name="next" type="hidden" value="{% url 'abids:auctions'%}">
-    </form> 
+</form>
 
 {% endblock content %}

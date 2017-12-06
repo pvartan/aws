@@ -1,7 +1,11 @@
 {% extends 'abids/base.html' %}
+{% load bootstrap3 %}
+
+{% block header %}
+ <h3>{{auction.title }}</h3>
+{% endblock header%}
 
 {% block content %}
-
 
 <div class="container">
         <div class="row">
@@ -43,28 +47,31 @@
 </div>
 
 <div class="panel-body">
-<ul style="list-style-type:none">
+<table class="table table-striped">
+<tbody>
     {% for bid in bids %}
-    <li>{{bid}} р. "{{bid.bid_comment}}" <a href="#">{{bid.bid_owner}}</a> {% comment%}{{bid.pub_date|date:'d M, Y H:i'}}{% endcomment%}</li>
+    <tr><td>{{bid}} р. "{{bid.bid_comment}}" <a href="#">{{bid.bid_owner}}</a> {% comment%}{{bid.pub_date|date:'d M, Y H:i'}}{% endcomment%}</td></tr>
 
     {% empty %}
-    <li>Пока не было предложений</li>
+    <tr><td>Пока не было предложений</td></tr>
 
     {% endfor %}
-</ul>
+</tbody>
+</table>
 
 
-<br>
-<p>Предложить:</p>
+<h4>Предложить:</h4>
 {% if user.is_authenticated %}
 
 {% if is_success %}{{is_success}}{% endif %}
 
 <form action="{% url 'abids:auction' auction.id %}" method="post">
     {%csrf_token%}
-    {{form.as_p}}
+    {% bootstrap_form form %}
 
-    <button name="submit">Submit</button>
+    {% buttons %} 
+    <button name="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
     </form>
 
 {% else %}
